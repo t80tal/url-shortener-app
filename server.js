@@ -10,13 +10,11 @@ import morgan from 'morgan'
 //db
 import connectDB from './db/connect.js'
 // routers
-// Here I am going to import the auth route
-// import authRouter from './routes/authRoutes.js'
+import authRouter from './routes/authRoutes.js'
 // middleware
 import notFoundMiddleware from './middleware/not-found.js'
 import errorHandlerMiddleware from './middleware/error-handler.js'
-// Here I am going to import an authenticateUser middleware
-// import authenticateUser from './middleware/auth.js'
+import authenticateUser from './middleware/auth.js'
 
 const app = express()
 dotenv.config()
@@ -32,8 +30,7 @@ app.use(helmet())
 app.use(xss())
 app.use(mongoSanitize())
 
-// Here I'm going to add the auth route
-// app.use('/auth', authRouter)
+app.use('/auth', authRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
