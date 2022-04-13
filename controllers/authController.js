@@ -1,16 +1,16 @@
 import User from '../models/User.js'
 import { StatusCodes } from 'http-status-codes'
-import { BadRequestError, UnAuthenticatedError } from '../errors/index.js'
+import { UnprocessableEntity, UnAuthenticatedError } from '../errors/index.js'
 
 // Sign-up path with validations.
 const signUp = async (req, res) => {
   const { name, email, password } = req.body
   if (!name || !email || !password) {
-    throw new BadRequestError('please provide all values')
+    throw new UnprocessableEntity('please provide all values')
   }
   const userAlreadyExists = await User.findOne({ email })
   if (userAlreadyExists) {
-    throw new BadRequestError('Email already in use')
+    throw new UnprocessableEntity('Email already in use')
   }
   const user = await User.create({ name, email, password })
 
@@ -26,7 +26,7 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   const { email, password } = req.body
   if (!email || !password) {
-    throw new BadRequestError('Please provide all values')
+    throw new UnprocessableEntity('Please provide all values')
   }
   const user = await User.findOne({ email }).select('+password')
   if (!user) {
@@ -49,7 +49,7 @@ const signIn = async (req, res) => {
 const updateUser = async (req, res) => {
   const { email, name } = req.body
   if (!email || !name) {
-    throw new BadRequestError('Please provide all values')
+    throw new UnprocessableEntity('Please provide all values')
   }
   const user = await User.findOne({ _id: req.user.userId })
 
