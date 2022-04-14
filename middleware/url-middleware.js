@@ -10,7 +10,7 @@ const urlHandlerMiddleware = async (req, res) => {
     if (url.longUrl.slice(0, 4) === 'http') {
       res.redirect(url.longUrl)
     }
-    longUrl = 'http://' + url.longUrl;
+    const longUrl = 'http://' + url.longUrl;
     res.redirect(longUrl)
   }
 }

@@ -10,13 +10,13 @@ const createUrl = async (req, res) => {
     // Get unique random link code.
     let random_url_code = '';
     while (true) {
-        random_url_code = Math.random().toString(36).substring(2, 10)
+        random_url_code = Math.random().toString(36).substring(2, 12)
         const url = await Url.findOne({ urlCode: random_url_code })
         if (!url) {
             break
         }
     }
-    
+
     // Insert to db with current userID as a creator.
     const url = await Url.create({ urlCode: random_url_code, longUrl, createdBy: req.user.userId })
     const { urlCode, views } = url
