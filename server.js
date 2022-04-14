@@ -10,9 +10,10 @@ import morgan from 'morgan'
 //db
 import connectDB from './db/connect.js'
 // routers
+import urlRouter from './routes/urlRoutes.js'
 import authRouter from './routes/authRoutes.js'
 // middleware
-import notFoundMiddleware from './middleware/not-found.js'
+import urlHandlerMiddleware from './middleware/url-middleware.js'
 import errorHandlerMiddleware from './middleware/error-handler.js'
 import authenticateUser from './middleware/auth.js'
 
@@ -31,8 +32,11 @@ app.use(xss())
 app.use(mongoSanitize())
 
 app.use('/auth', authRouter)
+// All endpoints inside require to be authenticated.
+app.use('/url', authenticateUser, urlRouter)
 
-app.use(notFoundMiddleware)
+// Middleware that takes care of the redirections with url_codes.
+app.use(urlHandlerMiddleware)
 app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT || 5000
