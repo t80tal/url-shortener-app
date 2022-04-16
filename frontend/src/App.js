@@ -1,8 +1,12 @@
+import { Layout } from './components';
+
 const App = () => {
   return (
-    <div>
-      Hello World
-    </div>
+    <Layout>
+      <div>
+        Content
+      </div>
+    </Layout>
   );
 }
 
