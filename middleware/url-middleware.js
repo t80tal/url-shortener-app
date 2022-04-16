@@ -7,12 +7,27 @@ const urlHandlerMiddleware = async (req, res) => {
   if (!url) {
     res.status(404).send('Route does not exist')
   } else {
-    if (url.longUrl.slice(0, 4) === 'http') {
-      res.redirect(url.longUrl)
-    }
-    const longUrl = 'http://' + url.longUrl;
-    res.redirect(longUrl)
+    // Get the IP of everyone who enter the link (I'm saving it in views).
+    const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || null).split(':').slice(-1)[0];
+    addViewToUrl(url_code, ip)
+    res.redirect(url.longUrl)
   }
+}
+
+const addViewToUrl = async (urlCode, ip) => {
+  const url = await Url.findOne({ urlCode })
+  let updatedViews = {}
+  if (url.views[ip]) {
+    updatedViews = { ...url.views, [ip]: { amount: ++url.views[ip].amount } }
+  } else {
+    updatedViews = { ...url.views, [ip]: { amount: 1 } }
+  }
+  await Url.findOneAndUpdate(
+    { urlCode },
+    { views: updatedViews }, {
+    new: true,
+    runValidators: true,
+  })
 }
 
 export default urlHandlerMiddleware

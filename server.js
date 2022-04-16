@@ -33,7 +33,7 @@ app.use(mongoSanitize())
 
 app.use('/auth', authRouter)
 // All endpoints inside require to be authenticated.
-app.use('/url', authenticateUser, urlRouter)
+app.use('/urls', authenticateUser, urlRouter)
 
 // Middleware that takes care of the redirections with url_codes.
 app.use(urlHandlerMiddleware)

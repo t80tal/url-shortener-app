@@ -16,7 +16,11 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     defaultError.statusCode = StatusCodes.UNPROCESSABLE_ENTITY
     defaultError.msg = `${Object.keys(err.keyValue)} field has to be unique`
   }
-  // Returns a nice looking error message with http-status-code.
+  if (err.code && err.code === 'ERR_INVALID_URL') {
+    defaultError.statusCode = StatusCodes.UNPROCESSABLE_ENTITY
+    defaultError.msg = `Invalid URL was given.`
+  }
+  // Returns a nice looking error message
   res.status(defaultError.statusCode).json({ msg: defaultError.msg })
 }
 
