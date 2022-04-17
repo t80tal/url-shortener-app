@@ -18,7 +18,7 @@ const useInput = (validator) => {
         // Cleanup function with timer
         const timer = setTimeout(() => {
             if (validator(value)) {
-                setInputClass('valid-input')
+                setInputClass('')
             } else if (!validator(value)) {
                 setInputClass('invalid-input')
             }

@@ -1,5 +1,6 @@
 import { authActions } from './auth'
 import axios from 'axios'
+import { uiActions } from '../ui-store/ui'
 
 export const login_with_credentials = (username, password) => {
     return async (dispatch) => {
@@ -7,10 +8,19 @@ export const login_with_credentials = (username, password) => {
             try {
                 const { data } = await axios.post(`/auth/sign-in/`, { username, password })
                 if (data && data.user.token) {
+                    setAlert({
+                        alertClass: 'success',
+                        msg: 'Logged in successfully...',
+                        target: 'login'
+                    }, dispatch)
                     localStorage.setItem('token', data.user.token)
                 }
             } catch (error) {
-                console.log(error.response.data.msg)
+                setAlert({
+                    alertClass: 'danger',
+                    msg: error.response.data.msg,
+                    target: 'login'
+                }, dispatch)
                 return
                 // #TODO: alert on error 
                 // dispatch(uiActions.disableLoading());
@@ -27,10 +37,19 @@ export const register_with_credentials = (name, email, username, password) => {
             try {
                 const { data } = await axios.post(`/auth/sign-up/`, { username, email, password, name })
                 if (data && data.user.token) {
+                    setAlert({
+                        alertClass: 'success',
+                        msg: 'Registered successfully...',
+                        target: 'register'
+                    }, dispatch)
                     localStorage.setItem('token', data.user.token)
                 }
             } catch (error) {
-                console.log(error.response.data.msg)
+                setAlert({
+                    alertClass: 'danger',
+                    msg: error.response.data.msg,
+                    target: 'register'
+                }, dispatch)
                 return
                 // #TODO: alert on error 
                 // dispatch(uiActions.disableLoading());
@@ -64,4 +83,11 @@ export const get_urls_by_token = () => {
         // dispatch(uiActions.enableLoading());
         sendRequest();
     }
+}
+
+const setAlert = (alertData, dispatch) => {
+    setTimeout(() => {
+        dispatch(uiActions.removeAlert())
+    }, 3000)
+    dispatch(uiActions.setAlert(alertData))
 }

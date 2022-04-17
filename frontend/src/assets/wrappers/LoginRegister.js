@@ -100,7 +100,7 @@ const Wrapper = styled.div`
     }
 
     .subcontainer-form svg {
-        margin: 25px 10px;
+        margin:0 10px 25px 10px;
         cursor: pointer;
         transition: ease all .3s;
     }
@@ -112,10 +112,12 @@ const Wrapper = styled.div`
     .text-button {
         text-decoration: none;
         cursor: pointer;
+        margin: auto;
         margin-top: 1.5rem;
         display: block;
         color: rgba(0,0,0,.6);
         font-size: 18px;
+        width: 195px;
         transition: all ease 0.15s;
     }
 
@@ -124,18 +126,32 @@ const Wrapper = styled.div`
         color: rgba(0, 0, 0, .7);
     }
 
-    .valid-input {
-        color: #155724 !important;
-        background-color: #d4edda !important;
-        border-color: #c3e6cb !important;
-    }
-
     .invalid-input {
         color: #721c24 !important;
         background-color: #f8d7da !important;
         border-color: #f5c6cb !important;
     }
 
+    .alert-area {
+        height: 50px !important;
+        display: flex;
+    }
+
+    .success {
+        margin: auto;
+        padding: 0.4rem 2rem;
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+
+    .danger {
+        margin: auto;
+        padding: 0.4rem 2rem;
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
 `
 
 export default Wrapper

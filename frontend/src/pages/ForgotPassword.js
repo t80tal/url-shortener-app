@@ -3,9 +3,10 @@ import Wrapper from '../assets/wrappers/LoginRegister'
 import BasePage from './BasePage'
 import { Link } from 'react-router-dom'
 import useInput from '../hooks/useInput'
+import { useSelector } from 'react-redux'
 
 const ForgotPassword = () => {
-
+    const alert = useSelector(state => state.ui.alert)
     // Username input
     const { value: username, setValue: setUsername, inputClass: usernameClass } = useInput((value) => {
         if (value.length > 5) {
@@ -49,6 +50,11 @@ const ForgotPassword = () => {
                     <h1>
                         Forgot password
                     </h1>
+                    <div className='alert-area'>
+                        {alert.target === 'forgotPassword' ? <div className={alert.alertClass}>
+                            {alert.msg}
+                        </div> : ''}
+                    </div>
                     <div className='subcontainer-form'>
                         <input value={username} class={usernameClass} onChange={setUsername} minLength={6} name="username" placeholder="Username" />
                         <h3>Or</h3>
