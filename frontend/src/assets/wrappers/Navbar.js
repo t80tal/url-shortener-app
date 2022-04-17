@@ -9,10 +9,15 @@ const Wrapper = styled.nav`
   font-size: 1.2rem;
 
   .navbar-logo {
+    text-decoration: none;
+  }
+  
+  .navbar-logo h1{
     color: #fff;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
+    text-decoration: none;
   }
 
   .navbar-collapse-icon {
@@ -25,6 +30,7 @@ const Wrapper = styled.nav`
   }
 
   .navbar-btn {
+    text-decoration: none;
     padding: 8px 20px;
     border-radius: 4px;
     outline: none;
@@ -32,7 +38,7 @@ const Wrapper = styled.nav`
     color: #fff;
     border: none;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 16px;
     transition: all 0.3s ease-out;
   }
 
@@ -67,7 +73,11 @@ const Wrapper = styled.nav`
   .navbar-dekstop-btn:hover {
     background-color: #6d76f7;
     border-radius: 4px;
-    transition: all 0.2s ease-out;
+    transition: all 0.2s ease;
+  }
+
+  .navbar-dekstop-btn.active {
+    border-bottom: 2.5px solid #3acbf7;
   }
 
   @media screen and (max-width: 995px) {

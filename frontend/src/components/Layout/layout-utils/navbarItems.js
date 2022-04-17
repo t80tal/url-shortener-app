@@ -4,31 +4,31 @@ const getNavbarItems = () => {
             {
                 id: 1,
                 title: 'Home',
-                url: '#',
+                url: '',
                 type: 'desktop'
             },
             {
                 id: 2,
-                title: 'page',
-                url: '#',
+                title: 'How to use?',
+                url: 'tutorial',
                 type: 'desktop'
             },
             {
                 id: 3,
-                title: 'page',
-                url: '#',
+                title: 'Why us?',
+                url: 'why-us',
                 type: 'desktop'
             },
             {
                 id: 4,
-                title: 'Contact Us',
-                url: '#',
+                title: 'Login',
+                url: 'login',
                 type: 'desktop'
             },
             {
                 id: 5,
                 title: 'Sign Up',
-                url: '#',
+                url: 'register',
                 type: 'mobile'
             },
         ]

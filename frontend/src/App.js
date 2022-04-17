@@ -1,11 +1,10 @@
-import { Layout } from './components';
+import { Layout } from './components'
+import AppRoutes from './AppRoutes'
 
 const App = () => {
   return (
     <Layout>
-      <div>
-        Content
-      </div>
+      <AppRoutes />
     </Layout>
   );
 }

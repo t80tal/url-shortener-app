@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.main`
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding: 1rem 0;
-    height: 84vh;
+    margin: auto;
+    padding: 5rem 0;
+    min-height: 69.9vh;
     text-align: center;
     width: 100%;
 `
