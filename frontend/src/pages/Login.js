@@ -1,7 +1,7 @@
 import React from 'react'
 import Wrapper from '../assets/wrappers/LoginRegister'
 import BasePage from './BasePage'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useInput from '../hooks/useInput'
 import { get_urls_by_token, login_with_credentials } from '../store/auth-store/auth-actions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux'
 const Login = () => {
     // Dispatch redux
     const dispatch = useDispatch()
+    // Navigate after logging in
+    const navigate = useNavigate()
     const alert = useSelector(state => state.ui.alert)
     // Inputs states with validators
 
@@ -37,8 +39,8 @@ const Login = () => {
         } else if ((passwordClass === 'invalid-input') || (usernameClass === 'invalid-input')) {
             // #TODO: dispatch error to ui with login key for the specific page
         }
-        dispatch(login_with_credentials(username, password))
-        dispatch(get_urls_by_token())
+        dispatch(login_with_credentials(username, password, navigate))
+        // dispatch(get_urls_by_token())
     }
 
     return (

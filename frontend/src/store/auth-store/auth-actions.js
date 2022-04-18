@@ -2,7 +2,7 @@ import { authActions } from './auth'
 import axios from 'axios'
 import { uiActions } from '../ui-store/ui'
 
-export const login_with_credentials = (username, password) => {
+export const login_with_credentials = (username, password, navigate) => {
     return async (dispatch) => {
         const sendRequest = async () => {
             try {
@@ -14,6 +14,7 @@ export const login_with_credentials = (username, password) => {
                         target: 'login'
                     }, dispatch)
                     localStorage.setItem('token', data.user.token)
+                    navigate('/')
                 }
             } catch (error) {
                 setAlert({

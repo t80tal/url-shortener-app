@@ -1,10 +1,14 @@
 import React from 'react'
-import { Navbar, Footer, Main } from './'
+import { useSelector } from 'react-redux'
+import { Navbar, Footer, Main, Sidebar, SearchBar } from './'
 
 const Layout = ({ children }) => {
+    const isLoggedIn = useSelector(state => state.auth.token)
     return (
         <React.Fragment>
-            <Navbar />
+            {!isLoggedIn && <Navbar />}
+            {isLoggedIn && <SearchBar />}
+            {isLoggedIn && <Sidebar />}
             <Main>
                 {children}
             </Main>
