@@ -1,5 +1,5 @@
 import React from 'react'
-import Wrapper from '../assets/wrappers/Card'
+import Wrapper from '../assets/wrappers/TmpCard'
 import person from '../assets/images/person.svg'
 
 const Card = () => {

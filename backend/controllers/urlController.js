@@ -1,6 +1,7 @@
 import Url from '../models/Url.js'
+import Users from '../models/User.js'
 import checkPermissions from '../utils/checkPermissions.js'
-import { NotFoundError, UnprocessableEntity } from '../errors/index.js'
+import { NotFoundError, UnprocessableEntity, UnAuthenticatedError } from '../errors/index.js'
 import { StatusCodes } from 'http-status-codes'
 // For ObjectId.isValid
 import mongoose from 'mongoose'
@@ -49,6 +50,10 @@ const deleteUrl = async (req, res) => {
 
 // Every user can get his own urls.
 const getUrlsByUserId = async (req, res) => {
+    const user = await Users.findOne({ id: req.user.userId })
+    if (!user) {
+        throw new UnAuthenticatedError('Not authenticated / Session might be expired')
+    }
     const urls = await Url.find({ createdBy: req.user.userId })
     res.status(StatusCodes.OK).json(urls)
 
@@ -63,23 +68,23 @@ const updateUrlById = async (req, res) => {
 
     const { longUrl } = req.body
     if (!longUrl) {
-      throw new UnprocessableEntity('Please provide url')
+        throw new UnprocessableEntity('Please provide url')
     }
     // Url Validation
     new URL(longUrl);
-    
+
     const url = await Url.findOne({ _id: urlId })
     if (!url) {
-      throw new NotFoundError(`No url with id :${urlId}`)
+        throw new NotFoundError(`No url with id :${urlId}`)
     }
     // check permissions
     checkPermissions(req.user, url.createdBy)
     const updatedUrl = await Url.findOneAndUpdate({ _id: urlId }, req.body, {
-      new: true,
-      runValidators: true,
+        new: true,
+        runValidators: true,
     })
-  
+
     res.status(StatusCodes.OK).json({ updatedUrl })
-  }
+}
 
 export { createUrl, deleteUrl, getUrlsByUserId, updateUrlById }

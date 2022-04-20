@@ -7,9 +7,10 @@ const Wrapper = styled.footer`
     width: 100%;
     background: linear-gradient(90deg, rgb(110, 94, 254), rgba(73, 63, 252, 1) 100%);
     height: 50px;
+    color: white;
 
     .footer-btn {
-        color: white;
+        color: inherit;
         font-weight: 400;
         margin: 13px 6px;
         transition: all ease .3s;

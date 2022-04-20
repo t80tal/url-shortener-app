@@ -5,7 +5,7 @@ UnAuthenticatedError
 const auth = async (req, res, next) => {
   const authHeader = req.headers.authorization
   if (!authHeader || !authHeader.startsWith('Bearer')) {
-    throw new UnAuthenticatedError('Authentication Invalid')
+    throw new UnAuthenticatedError('Authentication Invalid (maybe session expired)')
   }
   const token = authHeader.split(' ')[1]
   try {

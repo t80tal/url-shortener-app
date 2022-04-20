@@ -7,14 +7,16 @@ import { get_urls_by_token, login_with_credentials } from '../store/auth-store/a
 import { useDispatch, useSelector } from 'react-redux'
 
 const Login = () => {
-    // Dispatch redux
+    // Dispatch redux.
     const dispatch = useDispatch()
-    // Navigate after logging in
-    const navigate = useNavigate()
-    const alert = useSelector(state => state.ui.alert)
-    // Inputs states with validators
 
-    // Username input
+    // Navigate to redirect when succeed.
+    const navigate = useNavigate()
+
+    // Show when there's an alert.
+    const alert = useSelector(state => state.ui.alert)
+
+    // Inputs states with validators.
     const { value: username, setValue: setUsername, inputClass: usernameClass } = useInput((value) => {
         if (value.length > 5) {
             return true
@@ -22,8 +24,7 @@ const Login = () => {
             return false
         }
     })
-
-    // Password input
+    //
     const { value: password, setValue: setPassword, inputClass: passwordClass } = useInput((value) => {
         if (value.length > 5) {
             return true
@@ -31,7 +32,8 @@ const Login = () => {
             return false
         }
     })
-    // Form -> submithandler
+
+    // Onlogin handler.
     const loginHandler = event => {
         event.preventDefault()
         if (!password || !username) {
@@ -40,7 +42,6 @@ const Login = () => {
             // #TODO: dispatch error to ui with login key for the specific page
         }
         dispatch(login_with_credentials(username, password, navigate))
-        // dispatch(get_urls_by_token())
     }
 
     return (

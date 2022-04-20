@@ -4,12 +4,14 @@ const Wrapper = styled.div`
     min-width: 300px;
     height: 100vh;
     position: fixed;
+    z-index: 5;
     left: 0;
     top: 0;
     background-color: #fff;
     box-shadow: rgba(158, 167, 175, 0.22) 0px 7px 23px;
     
     .sidebar-logo {
+        cursor: pointer;
         height: 160px;
         display: flex;
         font-size: 41px;

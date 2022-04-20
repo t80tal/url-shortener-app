@@ -12,10 +12,15 @@ const authSlice = createSlice({
     initialState: initialAuthState,
     reducers: {
         setToken(state, action) {
-            state.userToken = action.payload
+            state.token = action.payload
         },
         setUrls(state, action) {
             state.user.urls = action.payload
+        },
+        logoutHandler(state) {
+            state.user.urls = {}
+            state.token = null
+            localStorage.removeItem('token')
         }
     }
 })

@@ -8,13 +8,16 @@ export const login_with_credentials = (username, password, navigate) => {
             try {
                 const { data } = await axios.post(`/auth/sign-in/`, { username, password })
                 if (data && data.user.token) {
+                    const token = data.user.token
                     setAlert({
                         alertClass: 'success',
                         msg: 'Logged in successfully...',
                         target: 'login'
                     }, dispatch)
-                    localStorage.setItem('token', data.user.token)
-                    navigate('/')
+                    dispatch(authActions.setToken(token))
+                    localStorage.setItem('token', token)
+                    dispatch(get_urls_by_token())
+                    navigate('/dashboard')
                 }
             } catch (error) {
                 setAlert({
@@ -71,11 +74,17 @@ export const get_urls_by_token = () => {
                     }
                 })
                 if (data) {
-                    console.log(data)
                     dispatch(authActions.setUrls(data))
                 }
             } catch (error) {
                 console.log(error.response.data.msg)
+                dispatch(authActions.setToken(null))
+                localStorage.removeItem('token')
+                setAlert({
+                    alertClass: 'danger',
+                    msg: error.response.data.msg,
+                    target: 'login'
+                }, dispatch)
                 return
                 // #TODO: alert on error 
                 // dispatch(uiActions.disableLoading());

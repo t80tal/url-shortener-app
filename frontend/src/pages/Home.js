@@ -3,9 +3,11 @@ import Wrapper from '../assets/wrappers/Home'
 import BasePage from './BasePage'
 import mainImage from '../assets/images/main.svg'
 import Card from '../components/Card'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
     return (
         <BasePage name="Home">
             <Wrapper>
