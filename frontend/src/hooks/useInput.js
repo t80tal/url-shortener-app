@@ -6,7 +6,13 @@ const useInput = (validator) => {
     // Initally there's no class.
     // On change value.
     const onChangeHandler = (event) => {
-        setValue(event.target.value)
+        if (typeof event === 'object' &&
+            !Array.isArray(event) &&
+            event !== null) {
+            setValue(event.target.value)
+        } else {
+            setValue(event)
+        }
     }
     useEffect(() => {
         // Validate depends on value.

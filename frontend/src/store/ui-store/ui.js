@@ -8,7 +8,8 @@ const initialUiState = {
         alertClass: '',
         msg: '',
         target: ''
-    }
+    },
+    modal: false
 };
 
 const uiSlice = createSlice({
@@ -31,6 +32,9 @@ const uiSlice = createSlice({
                 msg: '',
                 target: ''
             }
+        },
+        toggleModal(state) {
+            state.modal = !state.modal
         }
     }
 })

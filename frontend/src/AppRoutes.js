@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { Home, Login, Register, ForgotPassword, WhyUs, Tutorial, Campaigns, Urls } from './pages'
+import { Home, Login, Register, ForgotPassword, WhyUs, Tutorial, Urls } from './pages'
 import { useSelector } from 'react-redux'
 import Dashboard from './pages/Dashboard'
 
@@ -31,8 +31,7 @@ const AppRoutes = () => {
                 }
                 {/* Logged-in routes */}
                 <Route exact path='/dashboard' element={!isLoggedIn ? <Navigate to='/login' /> : <Dashboard />} />
-                <Route exact path='/campaigns' element={isLoggedIn ? <Campaigns /> : <Navigate to='/login' />} />
-                <Route exact path='/urls' element={isLoggedIn ? <Urls /> : <Navigate to='/login'/>} />
+                <Route exact path='/urls' element={isLoggedIn ? <Urls /> : <Navigate to='/login' />} />
             </Routes>
         </AnimatePresence>
     )

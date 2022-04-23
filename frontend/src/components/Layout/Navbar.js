@@ -18,9 +18,7 @@ const Navbar = () => {
 
     return (
         <Wrapper>
-
             <Link to='/' className='navbar-logo'><h1>EZLink</h1></Link>
-
             <div className='navbar-collapse-icon' onClick={toggleNavbarMenu}>
                 <CollapseButton isOpen={isOpen} />
             </div>

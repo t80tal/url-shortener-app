@@ -8,7 +8,7 @@ const TableRow = props => {
             <tr>
                 {props.content ? props.content.map(item => <td>{item}</td>) : null}
             </tr>
-        );
+        )
     } else if (typeof props.content === 'object') {
         const converted_content = []
         for (let key in props.content) {
@@ -18,7 +18,7 @@ const TableRow = props => {
             <tr>
                 {converted_content.map(item => <td>{item}</td>)}
             </tr>
-        );
+        )
     } else {
         return <h3>No information to show</h3>
     }

@@ -3,8 +3,7 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
  .table {
     color: #43545f;
-    width: 100%;
-    height: 63vh;
+    margin: 4.55rem auto auto 24.7rem;
     overflow-y: auto;
 }
 
@@ -37,13 +36,14 @@ const Wrapper = styled.div`
 }
 
 .table th:last-child, td:last-child {
-    border-top-left-radius: 6px 6px;
-    border-bottom-left-radius: 6px 6px;
+    border-top-right-radius: 6px 6px;
+    border-bottom-right-radius: 6px 6px;
 }
 
 .table th:first-child, td:first-child {
-    border-top-right-radius: 6px 6px;
-    border-bottom-right-radius: 6px 6px;
+    border-top-left-radius: 6px 6px;
+    border-bottom-left-radius: 6px 6px;
+    
 }
 
 .table tr:hover {
@@ -52,7 +52,7 @@ const Wrapper = styled.div`
 }
 
 .table tr:first-child {
-    background-color: #fafafa;
+    background-color: #f2f2f2;
     font-weight: bold;
 }
 

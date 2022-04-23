@@ -16,29 +16,32 @@ const Login = () => {
     // Show when there's an alert.
     const alert = useSelector(state => state.ui.alert)
 
+    const usernameValidator = (value) => {
+        if (value.length > 5) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const passwordValidator = (value) => {
+        if (value.length > 5) {
+            return true
+        } else {
+            return false
+        }
+    }
     // Inputs states with validators.
-    const { value: username, setValue: setUsername, inputClass: usernameClass } = useInput((value) => {
-        if (value.length > 5) {
-            return true
-        } else {
-            return false
-        }
-    })
+    const { value: username, setValue: setUsername, inputClass: usernameClass } = useInput(usernameValidator)
     //
-    const { value: password, setValue: setPassword, inputClass: passwordClass } = useInput((value) => {
-        if (value.length > 5) {
-            return true
-        } else {
-            return false
-        }
-    })
+    const { value: password, setValue: setPassword, inputClass: passwordClass } = useInput(passwordValidator)
 
     // Onlogin handler.
     const loginHandler = event => {
         event.preventDefault()
         if (!password || !username) {
             // #TODO: dispatch error to ui with login key for the specific page
-        } else if ((passwordClass === 'invalid-input') || (usernameClass === 'invalid-input')) {
+        } else if (!passwordValidator(password) || !usernameValidator(username)) {
             // #TODO: dispatch error to ui with login key for the specific page
         }
         dispatch(login_with_credentials(username, password, navigate))

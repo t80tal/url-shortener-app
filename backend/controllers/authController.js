@@ -42,6 +42,7 @@ const signIn = async (req, res) => {
   user.password = undefined
   res.status(StatusCodes.OK).json({
     user: {
+      username: user.username,
       token
     }
   })
