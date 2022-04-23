@@ -3,8 +3,9 @@ import Wrapper from '../assets/wrappers/LoginRegister'
 import BasePage from './BasePage'
 import { Link, useNavigate } from 'react-router-dom'
 import useInput from '../hooks/useInput'
-import { get_urls_by_token, login_with_credentials } from '../store/auth-store/auth-actions'
+import { login_with_credentials } from '../store/auth-store/auth-actions'
 import { useDispatch, useSelector } from 'react-redux'
+import { usernameValidator, passwordValidator } from '../validators'
 
 const Login = () => {
     // Dispatch redux.
@@ -16,21 +17,7 @@ const Login = () => {
     // Show when there's an alert.
     const alert = useSelector(state => state.ui.alert)
 
-    const usernameValidator = (value) => {
-        if (value.length > 5) {
-            return true
-        } else {
-            return false
-        }
-    }
 
-    const passwordValidator = (value) => {
-        if (value.length > 5) {
-            return true
-        } else {
-            return false
-        }
-    }
     // Inputs states with validators.
     const { value: username, setValue: setUsername, inputClass: usernameClass } = useInput(usernameValidator)
     //

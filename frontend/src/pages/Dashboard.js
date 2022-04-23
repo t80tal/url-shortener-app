@@ -66,7 +66,7 @@ const Dashboard = () => {
         </BasePage>
     )
 }
-
+// Url's functions
 const getViewsAmount = (urls) => {
     let totalAmount = 0
     if (!urls) {

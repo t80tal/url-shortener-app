@@ -9,7 +9,11 @@ const initialUiState = {
         msg: '',
         target: ''
     },
-    modal: false
+    modal: false,
+    isEditingUrl: {
+        modal: false,
+        id: null
+    }
 };
 
 const uiSlice = createSlice({
@@ -35,6 +39,16 @@ const uiSlice = createSlice({
         },
         toggleModal(state) {
             state.modal = !state.modal
+        },
+        setIsEditingUrl(state, action) {
+            state.isEditingUrl.modal = true
+            state.isEditingUrl.id = action.payload
+        },
+        closeEditingUrl(state) {
+            state.isEditingUrl = {
+                modal: false,
+                id: null
+            }
         }
     }
 })

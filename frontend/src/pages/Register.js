@@ -5,37 +5,20 @@ import { register_with_credentials } from '../store/auth-store/auth-actions'
 import useInput from '../hooks/useInput'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { emailValidator, usernameValidator, fullnameValidator } from '../validators'
 
 const Register = () => {
     // Inputs states with validators
     const dispatch = useDispatch()
     const alert = useSelector(state => state.ui.alert)
     // Username input
-    const { value: username, setValue: setUsername, inputClass: usernameClass } = useInput((value) => {
-        if (value.length > 5) {
-            return true
-        } else {
-            return false
-        }
-    })
+    const { value: username, setValue: setUsername, inputClass: usernameClass } = useInput(usernameValidator)
 
     // Name input
-    const { value: fullname, setValue: setFullname, inputClass: fullnameClass } = useInput((value) => {
-        if (value.length > 2) {
-            return true
-        } else {
-            return false
-        }
-    })
+    const { value: fullname, setValue: setFullname, inputClass: fullnameClass } = useInput(fullnameValidator)
 
     // Email input
-    const { value: email, setValue: setEmail, inputClass: emailClass } = useInput((value) => {
-        if ((value.length > 3) && (value.includes('@')) && (value.includes('.'))) {
-            return true
-        } else {
-            return false
-        }
-    })
+    const { value: email, setValue: setEmail, inputClass: emailClass } = useInput(emailValidator)
 
     // Password input
     const { value: password, setValue: setPassword, inputClass: passwordClass } = useInput((value) => {

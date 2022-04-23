@@ -1,101 +1,39 @@
-import React from 'react'
-import Modal from '../../UI/Modal'
-import styled from 'styled-components'
+import React, { useState } from 'react'
+import { Modal } from '../../'
 import { authActions } from '../../../store/auth-store/auth'
 import { useDispatch, useSelector } from 'react-redux'
-
-const SettingsWrapper = styled.div`
-    display: flex;
-    height: 100%;
-    border-radius: 4px;
-
-    div {
-        border-radius: 4px;
-        padding: 1rem 0;
-        text-align: center;
-    }
-
-    .options {
-        background-color: #f2f2f2;
-        flex: 1;
-        box-shadow: rgba(158, 167, 175, 0.3) 0px 7px 23px;
-    }
-
-    .options ul {
-        padding: 2rem 0;
-        list-style: none;
-    }
-
-    .cluster {
-        flex: 3;
-    }
-
-    .cluster p {
-        color: lightgray;
-    }
-
-    .cluster-form {
-        margin-top: 2rem;
-    }
-
-    .form-row input {
-        outline: none;
-        font-size: 18px;
-        padding: 0 1rem;
-        text-align: center;
-        border-radius: 4px;
-        border: 1px solid #d8d8d8;
-        box-shadow: rgba(158, 167, 175, 0.25) 0px 7px 23px;
-        padding: 0.1rem 1rem;
-    }
-
-    .form-row button {
-        cursor: pointer;
-        margin: 0 2rem;
-        padding: 0.6rem 1rem;
-        outline: none;
-        border: 4px;
-        font-weight: bold;
-        transition: all ease .3s;
-    }
-
-    .form-row button:hover {
-        transform: scale(1.05);
-    }
-
-    .form-row label {
-        font-size: 20px;
-        font-weight: 600;
-        margin-right: 1rem;
-    }
-
-    .options-item:hover {
-        background-color: #d8d8d8;
-    }
-
-    .options-item div {
-        width: 100px;
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .active {
-        background-color: #e2e2e2;
-    }
-
-`
+import Wrapper from '../../../assets/wrappers/SettingsWrapper'
+import { fullnameValidator, passwordValidator, emailValidator } from '../../../validators'
+import useInput from '../../../hooks/useInput'
+import { update_user_by_type } from '../../../store/auth-store/auth-actions'
 
 const SidebarSettings = ({ onClose }) => {
-    const username = useSelector(state => state.auth.user.username)
+    const [currentOption, setCurrentOption] = useState('fullname')
     const dispatch = useDispatch()
-    if (!username) {
-        dispatch(authActions.logoutHandler())
+
+    const { value: fullname, setValue: setFullname, inputClass: fullnameClass } = useInput(fullnameValidator)
+    const { value: email, setValue: setEmail, inputClass: emailClass } = useInput(emailValidator)
+    const { value: password, setValue: setPassword, inputClass: passwordClass } = useInput(passwordValidator)
+    const { value: oldPassword, setValue: setOldPassword, inputClass: oldPasswordClass } = useInput(passwordValidator)
+
+    const onChangeHandler = event => {
+        const type = event.target.name
+        switch (type) {
+            case 'fullname':
+                dispatch(update_user_by_type(type, oldPassword, fullname))
+                break;
+            case 'email':
+                dispatch(update_user_by_type(type, oldPassword, email))
+                break;
+            case 'password':
+                dispatch(update_user_by_type(type, oldPassword, password))
+                break;
+        }
     }
+
     return (
         <Modal onClose={onClose}>
-            <SettingsWrapper>
+            <Wrapper>
                 <div className='options'>
                     <h2>Settings</h2>
                     <ul>
@@ -114,25 +52,69 @@ const SidebarSettings = ({ onClose }) => {
                     <h2>Account settings</h2>
                     <p>Settings about your own account</p>
                     <div className='cluster-form'>
-                        <div className='form-row '>
-                            <label>Username: {username}</label>
+                        <div className='navbar'>
+                            <div className='menu'>
+                                <div onClick={() => setCurrentOption('fullname')} className={`option ${currentOption === 'fullname' && 'option-active'}`}>
+                                    Change full name
+                                </div>
+                                <div onClick={() => setCurrentOption('password')} className={`option ${currentOption === 'password' && 'option-active'}`}>
+                                    Change password
+                                </div>
+                                <div onClick={() => setCurrentOption('email')} className={`option ${currentOption === 'email' && 'option-active'}`}>
+                                    Change email
+                                </div>
+                            </div>
                         </div>
-                        <div className='form-row '>
-                            <label>Email: </label>
-                            <input />
-                            <button>Change</button>
-                        </div>
-                        <div className='form-row '>
-                            <label>Password: </label>
-                            <input />
-                            <button>Change</button>
-                        </div>
-                        <div className='form-row '>
 
-                        </div>
+                        {/* Change name section */}
+                        {currentOption === 'fullname' && (<>
+
+                            <div className='form-row '>
+                                <label>Full name: </label>
+                                <input value={fullname} onChange={setFullname} className={fullnameClass} />
+                            </div>
+                            <div className='form-row '>
+                                <label>old password: </label>
+                                <input type="password" value={oldPassword} onChange={setOldPassword} className={oldPasswordClass} />
+                            </div>
+                            <div className='form-row '>
+                                <button name="fullname" onClick={onChangeHandler}>Save</button>
+                            </div>
+                        </>)}
+
+                        {/* Change email section */}
+                        {currentOption === 'email' && (<>
+                            <div className='form-row '>
+                                <label>Email: </label>
+                                <input value={email} onChange={setEmail} className={emailClass} />
+                            </div>
+                            <div className='form-row '>
+                                <label>Old password: </label>
+                                <input type="password" value={oldPassword} onChange={setOldPassword} className={oldPasswordClass} />
+                            </div>
+                            <div className='form-row '>
+                                <button name="email" onClick={onChangeHandler}>Save</button>
+                            </div>
+                        </>)}
+
+                        {/* Change password section */}
+                        {currentOption === 'password' && (<>
+                            <div className='form-row '>
+                                <label>Old password: </label>
+                                <input type="password" value={oldPassword} onChange={setOldPassword} className={oldPasswordClass} />
+                            </div>
+                            <div className='form-row '>
+                                <label>New password: </label>
+                                <input type="password" value={password} onChange={setPassword} className={passwordClass} />
+                            </div>
+                            <div className='form-row '>
+                                <button name="password" onClick={onChangeHandler}>Save</button>
+                            </div>
+                        </>)}
+
                     </div>
                 </div>
-            </SettingsWrapper>
+            </Wrapper>
         </Modal>
     )
 }
