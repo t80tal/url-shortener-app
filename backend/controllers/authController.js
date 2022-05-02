@@ -39,35 +39,82 @@ const signIn = async (req, res) => {
     throw new UnAuthenticatedError('Invalid Credentials')
   }
   const token = user.createJWT()
+
+  // Removing password from object to avoid mistakes.
   user.password = undefined
+
   res.status(StatusCodes.OK).json({
     user: {
       token
     }
   })
 }
+const updateEmail = async (req, res) => {
+  const { email, oldPassword } = req.body
 
-// Update user path.
-const updateUser = async (req, res) => {
-  const { email, name, password } = req.body
-  if (!email || !name || !password) {
+  if (!email || !oldPassword) {
     throw new UnprocessableEntity('Please provide all values')
   }
-  const user = await User.findOne({ _id: req.user.userId })
+  const user = await User.findOne({ _id: req.user.userId }).select('+password')
+
+  const isPasswordCorrect = await user.comparePassword(oldPassword)
+
+  if (!isPasswordCorrect) {
+    throw new UnAuthenticatedError('Incorrect old password')
+  }
 
   user.email = email
-  user.name = name
-  user.password = password
-
   await user.save()
 
-  const token = user.createJWT()
+  // Removing password from object to avoid mistakes.
+  user.password = undefined
 
-  res.status(StatusCodes.OK).json({
-    user: {
-      token
-    }
-  })
+  res.status(StatusCodes.OK).json({ msg: 'Updated successfully' })
 }
 
-export { signUp, signIn, updateUser }
+const updateFullname = async (req, res) => {
+  const { name, oldPassword } = req.body
+
+  if (!name || !oldPassword) {
+    throw new UnprocessableEntity('Please provide all values')
+  }
+  const user = await User.findOne({ _id: req.user.userId }).select('+password')
+
+  const isPasswordCorrect = await user.comparePassword(oldPassword)
+
+  if (!isPasswordCorrect) {
+    throw new UnAuthenticatedError('Incorrect old password')
+  }
+
+  user.name = name
+  await user.save()
+
+  // Removing password from object to avoid mistakes.
+  user.password = undefined
+
+  res.status(StatusCodes.OK).json({ msg: 'Updated successfully' })
+}
+const updatePassword = async (req, res) => {
+  const { password, oldPassword } = req.body
+
+  if (!password || !oldPassword) {
+    throw new UnprocessableEntity('Please provide all values')
+  }
+  const user = await User.findOne({ _id: req.user.userId }).select('+password')
+
+  const isPasswordCorrect = await user.comparePassword(oldPassword)
+
+  if (!isPasswordCorrect) {
+    throw new UnAuthenticatedError('Incorrect old password')
+  }
+
+  user.password = password
+  await user.save()
+
+  // Removing password from object to avoid mistakes.
+  user.password = undefined
+
+  res.status(StatusCodes.OK).json({ msg: 'Updated successfully' })
+}
+
+export { signUp, signIn, updateEmail, updateFullname, updatePassword }

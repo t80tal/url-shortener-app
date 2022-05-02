@@ -100,28 +100,35 @@ export const get_urls_by_token = () => {
     }
 }
 
-export const update_user_by_type = (type, newValue, oldPassword) => {
+export const update_user = (type, oldPassword, newValue) => {
     return async (dispatch) => {
         const sendRequest = async () => {
             try {
-                // const { data } = await axios.get(`/urls/`, {
-                //     headers: {
-                //         'Authorization': 'Bearer ' + localStorage.getItem('token')
-                //     }
-                // })
-                // if (data) {
-                //     dispatch(authActions.setUrls(data))
-                // }
+                await axios.patch('/auth/update-' + type, {
+                    [type]: newValue,
+                    oldPassword
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                setAlert({
+                    alertClass: 'success',
+                    msg: 'Updated succesfully.',
+                    target: 'settings'
+                }, dispatch)
+                return
             } catch (error) {
-                // console.log(error.response.data.msg)
-                // dispatch(authActions.setToken(null))
-                // localStorage.removeItem('token')
-                // return
-                // #TODO: alert on error 
-                // dispatch(uiActions.disableLoading());
+                console.log(error)
+                setAlert({
+                    alertClass: 'danger',
+                    msg: error.response.data.msg,
+                    target: 'settings'
+                }, dispatch)
+                return
             }
+            // dispatch(uiActions.enableLoading());
         }
-        // dispatch(uiActions.enableLoading());
         sendRequest();
     }
 }

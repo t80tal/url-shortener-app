@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Modal } from '../../'
-import { authActions } from '../../../store/auth-store/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import Wrapper from '../../../assets/wrappers/SettingsWrapper'
 import { fullnameValidator, passwordValidator, emailValidator } from '../../../validators'
 import useInput from '../../../hooks/useInput'
-import { update_user_by_type } from '../../../store/auth-store/auth-actions'
+import { update_user } from '../../../store/auth-store/auth-actions'
 import { uiActions } from '../../../store/ui-store/ui'
 
 const SidebarSettings = ({ onClose }) => {
     const dispatch = useDispatch()
     const settingsOption = useSelector(state => state.ui.settingsModal.settingsOption)
 
-    const { value: fullname, setValue: setFullname, inputClass: fullnameClass } = useInput(fullnameValidator)
+    const { value: name, setValue: setName, inputClass: nameClass } = useInput(fullnameValidator)
     const { value: email, setValue: setEmail, inputClass: emailClass } = useInput(emailValidator)
     const { value: password, setValue: setPassword, inputClass: passwordClass } = useInput(passwordValidator)
     const { value: oldPassword, setValue: setOldPassword, inputClass: oldPasswordClass } = useInput(passwordValidator)
@@ -20,14 +19,14 @@ const SidebarSettings = ({ onClose }) => {
     const onChangeHandler = event => {
         const type = event.target.name
         switch (type) {
-            case 'fullname':
-                dispatch(update_user_by_type(type, oldPassword, fullname))
+            case 'name':
+                dispatch(update_user(type, oldPassword, name))
                 break;
             case 'email':
-                dispatch(update_user_by_type(type, oldPassword, email))
+                dispatch(update_user(type, oldPassword, email))
                 break;
             case 'password':
-                dispatch(update_user_by_type(type, oldPassword, password))
+                dispatch(update_user(type, oldPassword, password))
                 break;
         }
     }
@@ -62,7 +61,7 @@ const SidebarSettings = ({ onClose }) => {
                     <div className='cluster-form'>
                         <div className='navbar'>
                             <div className='menu'>
-                                <div id='fullname' onClick={openSettingsHandler} className={`option ${settingsOption === 'fullname' && 'option-active'}`}>
+                                <div id='name' onClick={openSettingsHandler} className={`option ${settingsOption === 'name' && 'option-active'}`}>
                                     Change full name
                                 </div>
                                 <div id='password' onClick={openSettingsHandler} className={`option ${settingsOption === 'password' && 'option-active'}`}>
@@ -75,18 +74,18 @@ const SidebarSettings = ({ onClose }) => {
                         </div>
 
                         {/* Change name section */}
-                        {settingsOption === 'fullname' && (<>
+                        {settingsOption === 'name' && (<>
 
                             <div className='form-row '>
                                 <label>Full name: </label>
-                                <input value={fullname} onChange={setFullname} className={fullnameClass} />
+                                <input value={name} onChange={setName} className={nameClass} />
                             </div>
                             <div className='form-row '>
                                 <label>old password: </label>
                                 <input type="password" value={oldPassword} onChange={setOldPassword} className={oldPasswordClass} />
                             </div>
                             <div className='form-row '>
-                                <button name="fullname" onClick={onChangeHandler}>Save</button>
+                                <button name="name" onClick={onChangeHandler}>Save</button>
                                 <button onClick={onCancelhandler}>cancel</button>
                             </div>
                         </>)}
