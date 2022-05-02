@@ -12,7 +12,10 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
 
-    
+    @media screen and (max-width: 1300px) {
+        width: 80vw;
+        
+    }
 
 
 `

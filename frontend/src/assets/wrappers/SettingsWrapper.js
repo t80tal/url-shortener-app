@@ -47,7 +47,7 @@ const Wrapper = styled.div`
 
     .form-row button {
         cursor: pointer;
-        margin: 0 2rem;
+        margin: 7px 2rem;
         padding: 0.6rem 1rem;
         outline: none;
         border: 4px;
@@ -117,6 +117,21 @@ const Wrapper = styled.div`
 
     .option-active {
         background-color: #d3d3d3;
+    }
+
+    @media screen and (max-width: 1300px) {
+        flex-direction: column;
+
+        .menu {
+            width: 100% !important;
+        }
+
+        .form-row {
+            display:flex;
+            width: 90%;
+            margin: auto;
+            flex-direction: column;
+        }
     }
 
 `

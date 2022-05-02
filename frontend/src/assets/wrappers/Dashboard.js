@@ -40,6 +40,14 @@ const Wrapper = styled.div`
     .ip-item:hover {
         background-color: aquamarine;
     }
+    @media screen and (max-width: 1300px) {
+        padding: 0;
+
+        .cards {
+            flex-direction: column;
+            width: auto;
+        }
+    }
 
 `
 

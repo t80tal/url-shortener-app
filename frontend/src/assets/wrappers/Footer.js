@@ -1,13 +1,24 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.footer`
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    background: linear-gradient(90deg, rgb(110, 94, 254), rgba(73, 63, 252, 1) 100%);
-    height: 50px;
-    color: white;
+    .footer-bar {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        height: 50px;
+        color: white;
+        overflow-x: hidden;
+    }
+    .logged-out-footer {
+        background: linear-gradient(90deg, rgb(110, 94, 254), rgba(73, 63, 252, 1) 100%);
+    }
+
+    .logged-in-footer {
+        color: rgb(110, 94, 254);
+        padding-left: 300px;
+        width: auto;
+    }
 
     .footer-btn {
         color: inherit;
@@ -18,6 +29,16 @@ const Wrapper = styled.footer`
 
     .footer-btn:hover {
         transform: scale(1.01);
+    }
+
+    .logged-in-footer {
+
+    }
+    @media screen and (max-width: 1300px) {
+        .logged-in-footer {
+            padding: 0;
+            margin-bottom: 60px;
+        }
     }
 `
 

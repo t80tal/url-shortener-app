@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-
     .row {
         display: flex;
         justify-content: center;
@@ -11,9 +10,7 @@ const Wrapper = styled.div`
         background: linear-gradient(90deg, rgb(165, 156, 255), rgba(118, 111, 255, 1) 100%);
     }
 
-    .search-input {
-        -webkit-box-shadow: inset 0px 0px 0px 1px #6568f4;
-        -moz-box-shadow: inset 0px 0px 0px 1px #6568f4;
+    .link-input {
         box-shadow: inset 0px 0px 0px 1px #6568f4;
         color: #2e2e2e;
         height: 50px;
@@ -72,10 +69,11 @@ const Wrapper = styled.div`
         align-items: center;
         color: #155724;
         background-color: #d4edda;
-        border-color: #c3e6cb;
+        box-shadow: inset 0px 0px 0px 1px #c3e6cb;
     }
 
     .danger {
+        box-shadow: inset 0px 0px 0px 1px #f5c6cb;
         width: 100%;
         height: 100%;
         display: flex;
@@ -83,26 +81,44 @@ const Wrapper = styled.div`
         align-items: center;
         color: #721c24;
         background-color: #f8d7da;
-        border-color: #f5c6cb;
     }
     
     .add-button:hover {
-        -webkit-box-shadow: inset 0px 0px 0px 1px #6568f4;
-        -moz-box-shadow: inset 0px 0px 0px 1px #6568f4;
         box-shadow: inset 0px 0px 0px 1px #6568f4;
         background-color: #fff;
         color: #6568f4;
         background-position: left;
     }
     @media screen and (max-width: 1300px) {
-        .search-input {
-            width: 400px;
-        }
-    }
-    @media screen and (max-width: 680px) {
-        .search-input {
-            width: 350px;
+        .link-input {
+            width: 290px;
             margin: auto;
+        }
+        .add-button {
+            font-size: 17px;
+            padding: 2px;
+            width: 110px;
+            margin: auto;
+        }
+        .row {
+            margin-top: 1rem;
+        }
+
+        .rows-table {
+            margin-left: 10px;
+        }
+
+        @media screen and (max-width: 500px) {
+            .link-input {
+                width: 240px;
+                margin: auto;
+            }
+            .add-button {
+                font-size: 17px;
+                padding: 2px;
+                width: 100px;
+                margin: auto;
+            }
         }
     }
 `

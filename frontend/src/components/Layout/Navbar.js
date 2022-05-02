@@ -25,7 +25,7 @@ const Navbar = () => {
             <ul className={`navbar-menu ${isOpen && 'navbar-menu-active'}`}>
                 {getNavbarItems().map((item) => {
                     return (
-                        <Link to={item.url} key={item.id} className={`${item.type === 'desktop' ? 'navbar-dekstop-btn' : 'navbar-mobile-btn'} ${cur_path === item.url ? 'active' : ''}`}>{item.title}</Link>
+                        <Link to={item.url} onClick={toggleNavbarMenu} key={item.id} className={`${item.type === 'desktop' ? 'navbar-dekstop-btn' : 'navbar-mobile-btn'} ${cur_path === item.url ? 'active' : ''}`}>{item.title}</Link>
                     );
                 })}
             </ul>

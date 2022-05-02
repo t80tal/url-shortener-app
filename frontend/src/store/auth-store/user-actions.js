@@ -31,7 +31,7 @@ export const createLinkHandler = (longUrl) => {
                 setAlert({
                     alertClass: 'danger',
                     msg: error.response.data.msg,
-                    target: 'dashboard'
+                    target: 'urls'
                 }, dispatch)
                 return
                 // #TODO: alert on error 
@@ -42,6 +42,67 @@ export const createLinkHandler = (longUrl) => {
         sendRequest();
     }
 }
+
+export const delete_url_by_id = (urlId) => {
+    return async (dispatch) => {
+        const sendRequest = async () => {
+            try {
+                await axios.delete('/urls/' + urlId, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                dispatch(uiActions.toggleUrlModal())
+                dispatch(get_urls_by_token())
+                setAlert({
+                    alertClass: 'success',
+                    msg: 'Deleted succesfully.',
+                    target: 'urls'
+                }, dispatch)
+                return
+            } catch (error) {
+                setAlert({
+                    alertClass: 'danger',
+                    msg: error.response.data.msg,
+                    target: 'urls'
+                }, dispatch)
+                return
+            }
+        }
+        sendRequest();
+    }
+}
+
+export const edit_url_by_id = (longUrl, urlId) => {
+    return async (dispatch) => {
+        const sendRequest = async () => {
+            try {
+                await axios.patch('/urls/' + urlId, { longUrl }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                dispatch(uiActions.toggleUrlModal())
+                dispatch(get_urls_by_token())
+                setAlert({
+                    alertClass: 'success',
+                    msg: 'Deleted succesfully.',
+                    target: 'urls'
+                }, dispatch)
+                return
+            } catch (error) {
+                setAlert({
+                    alertClass: 'danger',
+                    msg: error.response.data.msg,
+                    target: 'urls'
+                }, dispatch)
+                return
+            }
+        }
+        sendRequest();
+    }
+}
+
 
 const setAlert = (alertData, dispatch) => {
     setTimeout(() => {

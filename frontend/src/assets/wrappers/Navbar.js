@@ -7,6 +7,7 @@ const Wrapper = styled.nav`
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
+  
 
   .navbar-logo {
     text-decoration: none;
@@ -91,7 +92,7 @@ const Wrapper = styled.nav`
       display: flex;
       flex-direction: column;
       width: 100%;
-      height: 531px;
+      height: 335px;
       position: absolute;
       top: 70px;
       left: -100%;

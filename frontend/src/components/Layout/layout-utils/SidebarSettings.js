@@ -6,10 +6,11 @@ import Wrapper from '../../../assets/wrappers/SettingsWrapper'
 import { fullnameValidator, passwordValidator, emailValidator } from '../../../validators'
 import useInput from '../../../hooks/useInput'
 import { update_user_by_type } from '../../../store/auth-store/auth-actions'
+import { uiActions } from '../../../store/ui-store/ui'
 
 const SidebarSettings = ({ onClose }) => {
-    const [currentOption, setCurrentOption] = useState('fullname')
     const dispatch = useDispatch()
+    const settingsOption = useSelector(state => state.ui.settingsModal.settingsOption)
 
     const { value: fullname, setValue: setFullname, inputClass: fullnameClass } = useInput(fullnameValidator)
     const { value: email, setValue: setEmail, inputClass: emailClass } = useInput(emailValidator)
@@ -29,6 +30,13 @@ const SidebarSettings = ({ onClose }) => {
                 dispatch(update_user_by_type(type, oldPassword, password))
                 break;
         }
+    }
+
+    const openSettingsHandler = event => {
+        dispatch(uiActions.toggleSettingsModal(event.target.id))
+    }
+    const onCancelhandler = () => {
+        dispatch(uiActions.toggleSettingsModal())
     }
 
     return (
@@ -54,20 +62,20 @@ const SidebarSettings = ({ onClose }) => {
                     <div className='cluster-form'>
                         <div className='navbar'>
                             <div className='menu'>
-                                <div onClick={() => setCurrentOption('fullname')} className={`option ${currentOption === 'fullname' && 'option-active'}`}>
+                                <div id='fullname' onClick={openSettingsHandler} className={`option ${settingsOption === 'fullname' && 'option-active'}`}>
                                     Change full name
                                 </div>
-                                <div onClick={() => setCurrentOption('password')} className={`option ${currentOption === 'password' && 'option-active'}`}>
+                                <div id='password' onClick={openSettingsHandler} className={`option ${settingsOption === 'password' && 'option-active'}`}>
                                     Change password
                                 </div>
-                                <div onClick={() => setCurrentOption('email')} className={`option ${currentOption === 'email' && 'option-active'}`}>
+                                <div id='email' onClick={openSettingsHandler} className={`option ${settingsOption === 'email' && 'option-active'}`}>
                                     Change email
                                 </div>
                             </div>
                         </div>
 
                         {/* Change name section */}
-                        {currentOption === 'fullname' && (<>
+                        {settingsOption === 'fullname' && (<>
 
                             <div className='form-row '>
                                 <label>Full name: </label>
@@ -79,11 +87,12 @@ const SidebarSettings = ({ onClose }) => {
                             </div>
                             <div className='form-row '>
                                 <button name="fullname" onClick={onChangeHandler}>Save</button>
+                                <button onClick={onCancelhandler}>cancel</button>
                             </div>
                         </>)}
 
                         {/* Change email section */}
-                        {currentOption === 'email' && (<>
+                        {settingsOption === 'email' && (<>
                             <div className='form-row '>
                                 <label>Email: </label>
                                 <input value={email} onChange={setEmail} className={emailClass} />
@@ -94,11 +103,12 @@ const SidebarSettings = ({ onClose }) => {
                             </div>
                             <div className='form-row '>
                                 <button name="email" onClick={onChangeHandler}>Save</button>
+                                <button onClick={onCancelhandler}>cancel</button>
                             </div>
                         </>)}
 
                         {/* Change password section */}
-                        {currentOption === 'password' && (<>
+                        {settingsOption === 'password' && (<>
                             <div className='form-row '>
                                 <label>Old password: </label>
                                 <input type="password" value={oldPassword} onChange={setOldPassword} className={oldPasswordClass} />
@@ -109,6 +119,7 @@ const SidebarSettings = ({ onClose }) => {
                             </div>
                             <div className='form-row '>
                                 <button name="password" onClick={onChangeHandler}>Save</button>
+                                <button onClick={onCancelhandler}>cancel</button>
                             </div>
                         </>)}
 

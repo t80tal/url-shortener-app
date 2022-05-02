@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     .row:nth-child(2) {
         justify-content: center;
         text-align: center;
-        margin: 2rem auto;
+        margin: 2rem auto 0 auto;
         height: 125px;
         background: linear-gradient(90deg, rgb(165, 156, 255), rgba(118, 111, 255, 1) 100%);
     }
@@ -23,12 +23,10 @@ const Wrapper = styled.div`
     }
 
     .row:nth-child(3) h1{
-        margin: 1rem auto;
+        margin: 1.5rem auto;
     }
 
     .search-input {
-        -webkit-box-shadow: inset 0px 0px 0px 1px #6568f4;
-        -moz-box-shadow: inset 0px 0px 0px 1px #6568f4;
         box-shadow: inset 0px 0px 0px 1px #6568f4;
         color: #2e2e2e;
         height: 50px;
@@ -79,10 +77,12 @@ const Wrapper = styled.div`
         font-size: 25px;
         margin: 3rem 0;
     }
-
+    .invalid-input {
+        color: #721c24 !important;
+        background-color: #f8d7da !important;
+        border-color: #f5c6cb !important;
+    }
     .main-btn:nth-child(2) {
-        -webkit-box-shadow: inset 0px 0px 0px 1px #6568f4;
-        -moz-box-shadow: inset 0px 0px 0px 1px #6568f4;
         box-shadow: inset 0px 0px 0px 1px #6568f4;
         margin: auto 0;
         padding: 0.2rem 2rem;
@@ -90,8 +90,6 @@ const Wrapper = styled.div`
     }
 
     .main-btn:hover {
-        -webkit-box-shadow: inset 0px 0px 0px 1px #6568f4;
-        -moz-box-shadow: inset 0px 0px 0px 1px #6568f4;
         box-shadow: inset 0px 0px 0px 1px #6568f4;
         background-color: #fff;
         color: #6568f4;
@@ -104,6 +102,25 @@ const Wrapper = styled.div`
         width: 15rem;
         padding: 1rem 1rem;
         margin: 3rem 0;
+    }
+
+    .alert {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .success {
+        box-shadow: inset 0px 0px 0px 1px #c3e6cb;
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .danger {
+        color: #721c24;
+        box-shadow: inset 0px 0px 0px 1px #fcabb3;
+        background-color: #f8d7da;
     }
 
     @media screen and (max-width: 1300px) {
@@ -119,16 +136,20 @@ const Wrapper = styled.div`
         .search-input {
             width: 400px;
         }
+        .main-btn:nth-child(3) {
+            margin: 1.2rem auto;
+        }
     }
 
     @media screen and (max-width: 680px) {
         .search-input {
-            width: 350px;
+            width: 200px;
             margin: auto;
         }
 
         .main-btn:nth-child(2) {
-            padding: 0 0.7rem;
+            margin: auto;
+            padding: 0 8px;
         }
     }
 `

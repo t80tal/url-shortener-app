@@ -9,7 +9,7 @@ import { uiActions } from '../../store/ui-store/ui';
 const Sidebar = () => {
 
   const pathname = useLocation().pathname
-  const isModal = useSelector(state => state.ui.modal)
+  const isModal = useSelector(state => state.ui.settingsModal.modal)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -18,11 +18,16 @@ const Sidebar = () => {
   }
 
   const onOpenSettingsHandler = () => {
-    dispatch(uiActions.toggleModal())
+    dispatch(uiActions.toggleSettingsModal('fullname'))
   }
+
+  const onCloseSettingsHandler = () => {
+    dispatch(uiActions.toggleSettingsModal())
+  }
+
   return (
     <Wrapper>
-      {isModal && <SidebarSettings onClose={onOpenSettingsHandler} />}
+      {isModal && <SidebarSettings onClose={onCloseSettingsHandler} />}
       <h1 className='sidebar-logo' onClick={() => { navigate('/dashboard') }}>
         EZLink
       </h1>

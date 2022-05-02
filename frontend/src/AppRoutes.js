@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { Home, Login, Register, ForgotPassword, WhyUs, Tutorial, Urls } from './pages'
+import { Home, Login, Register, Urls } from './pages'
 import { useSelector } from 'react-redux'
 import Dashboard from './pages/Dashboard'
 
@@ -21,12 +21,9 @@ const AppRoutes = () => {
                     (<>
                         {/* Main */}
                         <Route exact path='/' element={<Home />} />
-                        <Route exact path='/why-us' element={<WhyUs />} />
-                        <Route exact path='/tutorial' element={<Tutorial />} />
                         {/* Authentication routes */}
                         <Route exact path='/login' element={<Login />} />
                         <Route exact path='/register' element={<Register />} />
-                        <Route exact path='/forgot-password' element={<ForgotPassword />} />
                     </>)
                 }
                 {/* Logged-in routes */}

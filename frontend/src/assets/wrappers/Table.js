@@ -1,23 +1,24 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
+    max-width: 95vw !important;
+    overflow-y: auto;
  .table {
     color: #43545f;
     margin: 4.55rem auto auto 24.7rem;
-    overflow-y: auto;
 }
 
-.table::-webkit-scrollbar {
+::-webkit-scrollbar {
     cursor: pointer;
     background-color: #fff;
 }
 
-.table::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: rgba(211, 211, 211, 0.3);
     border-radius: 10px;
 }
 
-.table::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: rgba(211, 211, 211, 0.7);
 }
 
@@ -59,6 +60,17 @@ const Wrapper = styled.div`
 .table tr:hover:first-child {
     color: #43545f;
     background-color: rgba(212, 212, 212, 0.5)
+}
+
+@media screen and (max-width: 1300px) { 
+    .table {
+        width: 100%;
+        margin: 3rem auto 3rem 0 !important;
+    }
+    .table th, td {
+        padding: 0.4rem;
+        font-size: 14px;
+    }
 }
 
 

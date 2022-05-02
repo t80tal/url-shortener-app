@@ -44,7 +44,7 @@ const Dashboard = () => {
                     <Card>
                         <h2>{urls.length ? urls.length : 0}</h2>
                         <h2>Online links</h2>
-                        <h4>Last 6 ip's:</h4>
+                        <h4>Last ip's that visited your links:</h4>
                         <ul className='last-six-ips'>
                             <hr />
                             {ips ? ips.map(ip => {

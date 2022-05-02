@@ -8,14 +8,16 @@ const Footer = () => {
   const isLoggedIn = useSelector(state => state.auth.token)
 
   return (
-    <Wrapper style={isLoggedIn ? {background: 'inherit', color: 'rgb(110, 94, 254)', paddingLeft: '300px', width: 'auto'} : {}}>
-      {
-        getFooterItems().map(item => {
-          return (
-            <Link to={item.url} key={item.id} className={'footer-btn'}>{item.title}</Link>
-          )
-        })
-      }
+    <Wrapper>
+      <div className={`footer-bar ${isLoggedIn ? 'logged-in-footer' : 'logged-out-footer'}`}>
+        {
+          getFooterItems().map(item => {
+            return (
+              <Link to={item.url} key={item.id} className={'footer-btn'}>{item.title}</Link>
+            )
+          })
+        }
+      </div>
     </Wrapper>
   )
 }

@@ -6,7 +6,6 @@ const Wrapper = styled.div`
     z-index: 2;
     display: flex;
     width: 1300px;
-    -webkit-filter: drop-shadow(0 0 10px rgba(0, 0, 0, .3));
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, .3));
     height: 80vh;
     text-align: center;
@@ -133,7 +132,7 @@ const Wrapper = styled.div`
     }
 
     .alert-area {
-        height: 50px !important;
+        min-height: 50px;
         display: flex;
     }
 
@@ -151,6 +150,70 @@ const Wrapper = styled.div`
         color: #721c24;
         background-color: #f8d7da;
         border-color: #f5c6cb;
+    }
+
+    @media screen and (max-width: 1300px) {
+        flex-direction: column;
+        width: 90vw;
+
+        .content {
+            padding: 1rem 3rem;
+            border-radius: 0;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .form {
+            padding-top: 1rem;
+            border-radius: 0 !important;
+            max-width: 90vw;
+        }
+
+        .form h1 {
+            margin-bottom: 0;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .form h1 {
+            font-size: 30px;
+            margin: 0.5rem auto auto auto;
+        }
+        .subcontainer-form svg{
+            margin-bottom: 0; 
+            width: 24px;
+        }
+        .subcontainer-form p {
+            margin-top: 0;
+        }
+        .subcontainer-form input {
+            margin: 0.4rem auto;
+            padding: 8px;
+            font-size: 12px;
+        }
+        .subcontainer-form button {
+            /* margin-top: 0.3rem; */
+        }
+        .text-button {
+            margin-top: 0.5rem;
+        }
+        .form {
+            height: 380px;
+        }
+        .content {
+            margin-top: -2.4rem;
+        }
+        .success {
+            padding: 0.1rem 2rem;
+            font-size: 11px;
+        }
+        .alert-area {
+            min-height: 2rem;
+        }
+        .danger {
+            padding: 0.1rem 2rem;
+            font-size: 13px;
+        }
+
     }
 `
 

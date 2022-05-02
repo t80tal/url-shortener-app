@@ -16,6 +16,10 @@ export const login_with_credentials = (username, password, navigate) => {
                     }, dispatch)
                     dispatch(authActions.setToken(token))
                     dispatch(get_urls_by_token())
+                    if (localStorage.getItem('tmp-given-url')) {
+                        navigate('/urls')
+                        return
+                    }
                     navigate('/dashboard')
                 }
             } catch (error) {
@@ -34,18 +38,25 @@ export const login_with_credentials = (username, password, navigate) => {
     }
 }
 
-export const register_with_credentials = (name, email, username, password) => {
+export const register_with_credentials = (name, email, username, password, navigate) => {
     return async (dispatch) => {
         const sendRequest = async () => {
             try {
                 const { data } = await axios.post(`/auth/sign-up/`, { username, email, password, name })
                 if (data && data.user.token) {
+                    const { token } = data.user
                     setAlert({
                         alertClass: 'success',
                         msg: 'Registered successfully...',
                         target: 'register'
                     }, dispatch)
-                    localStorage.setItem('token', data.user.token)
+                    dispatch(authActions.setToken(token))
+                    dispatch(get_urls_by_token())
+                    if (localStorage.getItem('tmp-given-url')) {
+                        navigate('/urls')
+                        return
+                    }
+                    navigate('/dashboard')
                 }
             } catch (error) {
                 setAlert({

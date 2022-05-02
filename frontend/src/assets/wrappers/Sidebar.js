@@ -81,6 +81,57 @@ const Wrapper = styled.div`
         flex-direction: column;
         justify-content: space-content;
     }
+    @media screen and (max-width: 1300px) {
+        position: fixed;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        left: auto;
+        top: auto;
+        bottom: 0;
+        
+        .sidebar-logo {
+           display: none;
+        }
+
+        .items {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .top-items {
+            height: 100%;
+            display: flex;
+            margin: 0;
+        }
+        .bottom-items {
+            display: flex;
+            height: 100%;
+            margin: 0;
+        }
+
+
+        .sidebar-item {
+            width:  25vw;
+            height: 100%;
+            font-size: 12px;
+            border-radius: 0;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+        }
+        .item-svg {
+            margin-right: 4px;
+        }
+
+        .sidebar-item-container {
+            padding: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+    }
 
 
 `
