@@ -1,19 +1,13 @@
 import React from 'react'
-import { animate, motion } from 'framer-motion'
-import { useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
-// Base page with aniamtions.
+import useTitle from '../hooks/useTitle'
+
+// Base page with animations.
 const BasePage = props => {
-    // const token = useSelector(state => state.auth.token)
-    // const navigate = useNavigate()
-    // const pathname = useLocation().pathname
 
-    // const loggedInRoutes = ['/dashboard', '/urls', '/campaigns']
-    // console.log(loggedInRoutes.includes(pathname))
-    // if (loggedInRoutes.includes(pathname) && !token) {
-    //     navigate('/')
-    // }
+    // Page title
+    useTitle('Url shortener | ' + props.name)
 
     return (
         <motion.div

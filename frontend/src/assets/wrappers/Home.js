@@ -104,8 +104,9 @@ const Wrapper = styled.div`
         margin: 3rem 0;
     }
 
-    .alert {
+    .alert div {
         height: 30px;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;

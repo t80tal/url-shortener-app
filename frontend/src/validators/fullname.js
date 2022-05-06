@@ -1,3 +1,5 @@
+// Name validator function
+
 const fullnameValidator = (value) => {
     if (value.length > 2) {
         return true

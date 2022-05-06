@@ -1,3 +1,5 @@
+// Username validator function
+
 const usernameValidator = (value) => {
     if (value.length > 5) {
         return true

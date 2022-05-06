@@ -1,9 +1,11 @@
 import React from 'react'
-import getFooterItems from './layout-utils/footerItems'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
+import { getFooterItems } from './'
 import Wrapper from '../../assets/wrappers/Footer'
 
+// Footer component.
 const Footer = () => {
   const isLoggedIn = useSelector(state => state.auth.token)
 

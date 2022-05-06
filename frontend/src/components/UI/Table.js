@@ -1,22 +1,13 @@
 import React from 'react'
+
 import Wrapper from '../../assets/wrappers/Table';
 
-
+// Table Row component.
 const TableRow = props => {
-    if (Array.isArray(props.content)) {
+    if (props.content) {
         return (
             <tr>
-                {props.content ? props.content.map(item => <td>{item}</td>) : null}
-            </tr>
-        )
-    } else if (typeof props.content === 'object') {
-        const converted_content = []
-        for (let key in props.content) {
-            converted_content.push(props.content[key])
-        }
-        return (
-            <tr>
-                {converted_content.map(item => <td>{item}</td>)}
+                {props.content ? props.content.map(info => <td>{info}</td>) : null}
             </tr>
         )
     } else {
@@ -25,15 +16,20 @@ const TableRow = props => {
 
 }
 
-const Table = props => {
+// Table component.
+const Table = ({ categories, information }) => {
     return (
         <Wrapper>
-            <table className='table'>
-                <tr>
-                    {props.categories ? props.categories.map(category => <th>{category}</th>) : null}
-                </tr>
-                {props.information ? props.information.map(content => <TableRow content={content} />) : null}
-            </table>
+            <div className='table'>
+                <table>
+                    <tbody>
+                        <tr>
+                            {categories ? categories.map(category => <th key={'caegory_' + category}>{category}</th>) : null}
+                        </tr>
+                        {information ? information.map(content => <TableRow key={content[1]} content={content} />) : null}
+                    </tbody>
+                </table>
+            </div>
         </Wrapper>
     );
 }

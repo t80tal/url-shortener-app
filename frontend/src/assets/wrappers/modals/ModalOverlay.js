@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const ModalWrapper = styled.div`
+const Wrapper = styled.div`
     position: fixed;
     top: 5vh;
     width: 70%;
@@ -17,15 +16,18 @@ const ModalWrapper = styled.div`
         top: 1.5vh;
         left: 5%;
     }
+
+    @keyframes slide-down {
+        from {
+            opacity: 0;
+            transform: translateY(-3rem);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 `
 
-const ModalOverlay = ({ children, styles }) => {
-    return (
-        <ModalWrapper style={styles} className='modal'>
-            <div className='content'>{children}</div>
-        </ModalWrapper>
-    )
-}
-
-
-export default ModalOverlay
+export default Wrapper

@@ -1,3 +1,5 @@
+// Email validator function
+
 const emailValidator = (value) => {
     if ((value.length > 3) && (value.includes('@')) && (value.includes('.'))) {
         return true

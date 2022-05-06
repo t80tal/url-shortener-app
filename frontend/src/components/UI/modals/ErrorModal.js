@@ -1,7 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Modal from './Modal'
 
+import Wrapper from '../../../assets/wrappers/modals/ErrorModal'
+import Modal from './basemodal/Modal'
+
+// Custom styles for the error modal.
 const errorModalStyles = {
     background: 'inherit',
     color: '#721c24',
@@ -9,6 +12,8 @@ const errorModalStyles = {
     backgroundColor: '#f8d7da',
     top: '35vh',
     display: 'flex',
+    width: '350px',
+    left: 'calc(50% - 175px)',
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '40px',
@@ -19,11 +24,15 @@ const errorBackdropStyles = {
     display: 'none'
 }
 
+// Error modal.
 const ErrorModal = () => {
     const errorMsg = useSelector(state => state.ui.error.msg)
     return (
         <Modal modalStyles={errorModalStyles} backdropStyles={errorBackdropStyles}>
-            {errorMsg}
+            <Wrapper>
+                <h3>UH OH, THERE WAS AN ERROR</h3>
+                <span>{errorMsg || 'invalid url'}</span>
+            </Wrapper>
         </Modal>
     )
 }

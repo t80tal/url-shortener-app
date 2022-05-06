@@ -48,7 +48,7 @@ const Wrapper = styled.div`
 }
 
 .table tr:hover {
-    background-color: #3298f8;
+    background-color: rgba(118, 111, 255, 1);
     color: #fff;
 }
 
@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 @media screen and (max-width: 1300px) { 
     .table {
         width: 100%;
-        margin: 3rem auto 3rem 0 !important;
+        margin: 3rem auto 2rem 0;
     }
     .table th, td {
         padding: 0.4rem;

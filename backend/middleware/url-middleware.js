@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes'
 import Url from '../models/Url.js'
 
 const urlHandlerMiddleware = async (req, res) => {
@@ -10,7 +11,9 @@ const urlHandlerMiddleware = async (req, res) => {
     // Get the IP of everyone who enter the link (I'm saving it in views).
     const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || null).split(':').slice(-1)[0];
     addViewToUrl(url_code, ip)
-    res.redirect(url.longUrl)
+    res.status(StatusCodes.OK).json({
+      url: url.longUrl
+    })
   }
 }
 

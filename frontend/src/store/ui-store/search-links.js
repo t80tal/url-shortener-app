@@ -1,5 +1,7 @@
-import { authActions } from "../auth-store/auth";
+import { authActions } from '../auth-store/auth';
 
+// All "tags" / "key" word for helping with the searching.
+// Link for redirection or action for executing a function.
 export const links = [
     {
         title: 'Create a new url',

@@ -17,7 +17,6 @@ const getNavbarItems = () => {
                 id: 3,
                 title: 'Sign Up',
                 url: 'register',
-                type: 'mobile'
             },
         ]
     );

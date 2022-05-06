@@ -60,12 +60,6 @@ const Wrapper = styled.div`
         transform: scale(1.05);
     }
 
-    .form-row label {
-        font-size: 20px;
-        font-weight: 600;
-        margin-right: 1rem;
-    }
-
     .options-item:hover {
         background-color: #d8d8d8;
     }
@@ -110,7 +104,31 @@ const Wrapper = styled.div`
         height: 25px;
         border-radius: 0;
     }
+    .alert {
+        margin: 0 auto;
+        padding: 0;
+        height: 30px ;
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .success {
+        padding: 1px;
+        width: 100%;
+        box-shadow: inset 0px 0px 0px 1px #c3e6cb;
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .danger {
+        padding: 1px;
+        width: 100%;
+        color: #721c24;
+        box-shadow: inset 0px 0px 0px 1px #fcabb3;
+        background-color: #f8d7da;
+    }
     .option:hover {
         background-color: #e0e0e0;
     }

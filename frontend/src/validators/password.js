@@ -1,3 +1,5 @@
+// Password validator function
+
 const passwordValidator = (value) => {
     if (value.length > 5) {
         return true

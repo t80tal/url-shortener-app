@@ -1,23 +1,26 @@
-import React, { useId } from 'react'
-import Wrapper from '../../assets/wrappers/SearchBar'
-import { Link, useNavigate } from 'react-router-dom'
-import { uiActions } from '../../store/ui-store/ui'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
+import Wrapper from '../../assets/wrappers/SearchBar'
+import { uiActions } from '../../store/ui-store/ui'
+
+// Search bar Component
 const SearchBar = () => {
+    // searching by filtering an array (from state).
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const searchBar = useSelector(state => state.ui.searchBar)
     const onSearching = event => {
         dispatch(uiActions.onSearching(event.target.value))
     }
-
     return (
         <Wrapper>
             <input value={searchBar.value} onChange={onSearching} type='search' placeholder='Search...' />
             {searchBar.isOpen &&
                 (<ul className='dropdown'>
                     {searchBar.results.map(result => {
+                        // Redirection (wuth navigate) or executing a function
                         return (
                             <li onClick={() => {
                                 dispatch(uiActions.onSearching(''))

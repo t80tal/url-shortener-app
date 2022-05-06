@@ -7,7 +7,7 @@ const getFooterItems = () => {
                 url: '#',
             },
             {
-                id: 1,
+                id: 2,
                 title: 'Contact us',
                 url: '#',
             },

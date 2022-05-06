@@ -105,7 +105,7 @@ const Wrapper = styled.div`
         }
 
         .rows-table {
-            margin-left: 10px;
+            margin-left: 6px;
         }
 
         @media screen and (max-width: 500px) {

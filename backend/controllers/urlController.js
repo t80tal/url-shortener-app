@@ -8,27 +8,40 @@ import mongoose from 'mongoose'
 
 
 const createUrl = async (req, res) => {
-    const longUrl = req.body.longUrl
+    let longUrl = req.body.longUrl
+    const protocol = longUrl.split(".")[0].split(":")
+    const allowedProtocols = ['http', 'https', 'ftp', 'smtp']
     // Url Validation
-    new URL(longUrl);
-    // Generate unique random link code.
-    let random_url_code = '';
-    while (true) {
-        random_url_code = Math.random().toString(36).substring(2, 12)
-        const url = await Url.findOne({ urlCode: random_url_code })
-        if (!url) {
-            break
+    if ((longUrl.length > 2) && longUrl.includes('.') && (longUrl[0] !== '.') && (longUrl[longUrl.length - 1] !== '.')) {
+        if (!allowedProtocols.includes(protocol[0])) {
+            // If there's not a protocol then add one.
+            if (protocol.length === 1) {
+                longUrl = 'https://' + longUrl
+            } else {
+                throw new UnprocessableEntity('Enter a valid URL.')
+            }
         }
+        // Generate unique random link code.
+        let random_url_code = ''
+        while (true) {
+            random_url_code = Math.random().toString(36).substring(2, 12)
+            const url = await Url.findOne({ urlCode: random_url_code })
+            if (!url) {
+                break
+            }
+        }
+        // Insert to db with current userID as a creator.
+        const url = await Url.create({ urlCode: random_url_code, longUrl, createdBy: req.user.userId })
+        const { urlCode, views, id } = url
+        res.status(StatusCodes.OK).json({
+            id,
+            urlCode,
+            longUrl,
+            views
+        })
+    } else {
+        throw new UnprocessableEntity('Enter a valid URL.')
     }
-    // Insert to db with current userID as a creator.
-    const url = await Url.create({ urlCode: random_url_code, longUrl, createdBy: req.user.userId })
-    const { urlCode, views, id } = url
-    res.status(StatusCodes.OK).json({
-        id,
-        urlCode,
-        longUrl,
-        views
-    })
 }
 
 const deleteUrl = async (req, res) => {

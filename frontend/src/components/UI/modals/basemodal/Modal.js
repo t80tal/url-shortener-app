@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import Backdrop from './Backdrop'
 import ModalOverlay from './ModalOverlay'
 
 
 const portalElement = document.getElementById('overlays')
 
-// Modal with portal to 'overlays' div instead of 'root' (the modal accept styles if there's).
+// A generic modal with portal to 'overlays' div instead of 'root' (the modal accept styles from parent components, like ErrorModal and LoadingModal).
 const Modal = ({ children, onClose, modalStyles, backdropStyles }) => {
     return (
         <React.Fragment>
