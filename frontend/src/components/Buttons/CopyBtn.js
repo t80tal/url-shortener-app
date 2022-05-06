@@ -3,8 +3,12 @@ import react from 'react'
 // Copy short link button (I place it in the urls tables).
 const CopyBtn = ({ code }) => {
     const onCopyingHandler = () => {
-        navigator.clipboard.writeText(code)
-        alert('Copied successfully.')
+        if (!navigator.clipboard) {
+            alert('Your browser doesnt give us the permission to to this')
+        } else {
+            navigator.clipboard.writeText(code)
+            alert('Copied successfully.')
+        }
     }
     return (
         <svg style={{ cursor: 'pointer' }} onClick={onCopyingHandler} alt='Copy icon to describe the short url copy button' xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='currentColor' viewBox='0 0 16 16'>

@@ -45,7 +45,9 @@ const Wrapper = styled.div`
     }
 
     .edit-btn {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items:center;
         width: 50%;
         outline: none;
         border: none;
@@ -59,9 +61,11 @@ const Wrapper = styled.div`
         cursor: pointer;
     }
 
-    .delete-cancel-btn {
+    .delete-btn {
         width: 50%;
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items:center;
         outline: none;
         border: none;
         border-radius: 4px;
@@ -75,18 +79,39 @@ const Wrapper = styled.div`
         cursor: pointer;
     }
 
+    .cancel-btn {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        margin-top: 1.5rem;
+        font-size: 18px;
+        color: white;
+        padding: 0.7rem 5rem;
+        background: linear-gradient(to left, rgb(255, 158, 79) 50%, #fafafa 50%) right;
+        background-size: 200%;
+        transition: .15s ease-out;
+        cursor: pointer;
+    }
+
+    .cancel-btn:hover {
+        box-shadow: inset 0px 0px 0px 1px rgb(255, 158, 79);
+        background-color: #fff;
+        color: #ff584f;
+        background-position: left;
+    }
+
     .edit-btn:hover {
-        -webkit-box-shadow: inset 0px 0px 0px 1px #06c1d6;
-        -moz-box-shadow: inset 0px 0px 0px 1px #06c1d6;
         box-shadow: inset 0px 0px 0px 1px #06c1d6;
         background-color: #fff;
         color: #06c1d6;
         background-position: left;
     }
 
-    .delete-cancel-btn:hover {
-        -webkit-box-shadow: inset 0px 0px 0px 1px #ff584f;
-        -moz-box-shadow: inset 0px 0px 0px 1px #ff584f;
+    .delete-btn:hover {
         box-shadow: inset 0px 0px 0px 1px #ff584f;
         background-color: #fff;
         color: #ff584f;
@@ -95,10 +120,14 @@ const Wrapper = styled.div`
 
     
     .save-btn {
-        display: block;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items:center;
         outline: none;
         border: none;
         border-radius: 4px;
+        margin-top: 1.5rem;
         font-size: 18px;
         color: white;
         padding: 0.7rem 5rem;
@@ -114,8 +143,6 @@ const Wrapper = styled.div`
     }
 
     .save-btn:hover {
-        -webkit-box-shadow: inset 0px 0px 0px 1px #06d648;
-        -moz-box-shadow: inset 0px 0px 0px 1px #06d648;
         box-shadow: inset 0px 0px 0px 1px #06d648;
         background-color: #fff;
         color: #06d648;
@@ -134,11 +161,11 @@ const Wrapper = styled.div`
     }
     .alert-area {
         display: flex;
-        height: 15px !important;
-        font-size: 14px;
+        height: 20px !important;
+        font-size: 12px;
         justify-content: center;
         align-items: center;
-        width: 85%;
+        width: 70%;
         margin: auto;
     }
     .success {
@@ -163,7 +190,7 @@ const Wrapper = styled.div`
         background-color: #f8d7da;
     }
     @media screen and (max-width: 1300px) {
-        height: 89vh;
+        height: 85vh;
         .flex-container {
             flex-direction: column;
             font-size: 85%;
@@ -179,22 +206,48 @@ const Wrapper = styled.div`
 
         .edit-btn {
             font-size: 13px;
-            display: flex;
-            justify-content: center;
+            margin: 3px;
+            padding: 0.6rem 2.5rem;
         }
 
         .save-btn {
             font-size: 13px;
-            display: flex;
-            justify-content: center;
+            margin: 3px;
+            padding: 0.6rem 2.5rem;
         }
 
-        .delete-cancel-btn {
+        .delete-btn {
             font-size: 13px;
-            display: flex;
-            justify-content: center;
+            margin: 3px;
+            padding: 0.6rem 2.5rem;
         }
 
+        .cancel-btn {
+            font-size: 13px;
+            margin: 3px;
+            padding: 0.6rem 2.5rem;
+        }
+        .row h2 {
+            margin: 0 4px;
+            font-size: 17px;
+        }
+        .information {
+            max-height: 280px;
+        }
+
+    }
+
+    @media screen and (max-height: 700px) {
+        
+        .information {
+            
+        }
+        .row {
+            margin: 5px;
+        }
+        .buttons {
+            flex-direction: row;
+        }
     }
 `
 

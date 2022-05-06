@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Chart from 'react-apexcharts'
 
 import { getUrlsChartOptions, getUrlChartData, getAmountOfClicksByUrl } from '../../../filteringFunctions/urls'
-import Wrapper from '../../../assets/wrappers/UrlModal'
+import Wrapper from '../../../assets/wrappers/modals/UrlModal'
 import useInput from '../../../hooks/useInput'
 import { urlValidator } from '../../../validators'
 import Modal from './basemodal/Modal'
@@ -48,7 +48,7 @@ const UrlModal = ({ selectedUrl }) => {
     return (
         <Modal onClose={onCloseUrlModalHandler}>
             <Wrapper>
-                <h2>Last ten ip's:</h2>
+                <h2>Last ip's:</h2>
                 <Chart
                     options={getUrlsChartOptions(selectedUrl)}
                     series={getUrlChartData(selectedUrl)}
@@ -59,21 +59,21 @@ const UrlModal = ({ selectedUrl }) => {
                 <div className='flex-container'>
                     <div className='information'>
                         <div className='row'><h2>Original url: </h2>{!inEditingMode ? selectedUrl.longUrl : (<input className={`editing-input ${editUrlClass}`} value={editUrlValue} onChange={setEditUrlValue} placeholder={selectedUrl.longUrl} />)}</div>
-                        <div className='alert-area'>
+                        <div className='row alert-area'>
                             {/* editUrlResult is a validation from frontend and inputsAlert are from backend */}
                             <div className={inputAlert.target === 'editingUrls' ? inputAlert.alertClass : editUrlResult.type}>
                                 {inputAlert.target === 'editingUrls' ? inputAlert.msg : editUrlResult.message}
                             </div>
                         </div>
-                        <div className='row'><h2>Short url: </h2>{'localhost/' + selectedUrl.urlCode}</div>
+                        <div className='row'><h2>Short url: </h2>{window.location.origin + '/' + selectedUrl.urlCode}</div>
                         <div className='row'><h2>Amount of clicks: </h2>{getAmountOfClicksByUrl(selectedUrl)}</div>
                         <div className='row'><h2>Last time edited: </h2>{new Date(selectedUrl.updatedAt.slice(0, 10)).toDateString()}</div>
                         <div className='row'><h2>Created at: </h2>{new Date(selectedUrl.createdAt.slice(0, 10)).toDateString()}</div>
                     </div>
                     <div className='buttons'>
                         <button onClick={!inEditingMode ? onEditingModeHandler : onSaveEditURLHandler} className={!inEditingMode ? 'edit-btn' : 'save-btn'}>{!inEditingMode ? 'Edit' : 'Save'}</button>
-                        <button onClick={onDeleteURLHandler} className='delete-cancel-btn'>Delete</button>
-                        <button onClick={onCancelEditingModeHandler} className='delete-cancel-btn'>Cancel</button>
+                        <button onClick={onDeleteURLHandler} className='delete-btn'>Delete</button>
+                        <button onClick={onCancelEditingModeHandler} className='cancel-btn'>Cancel</button>
                     </div>
                 </div>
             </Wrapper>

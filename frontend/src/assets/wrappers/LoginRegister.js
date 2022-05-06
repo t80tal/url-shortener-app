@@ -155,7 +155,7 @@ const Wrapper = styled.div`
     @media screen and (max-width: 1300px) {
         flex-direction: column;
         width: 90vw;
-
+        
         .content {
             padding: 1rem 3rem;
             border-radius: 0;
@@ -163,7 +163,7 @@ const Wrapper = styled.div`
             border-top-right-radius: 12px;
         }
         .form {
-            padding-top: 1rem;
+            padding-top: 0.5rem;
             border-radius: 0 !important;
             max-width: 90vw;
         }
@@ -174,9 +174,20 @@ const Wrapper = styled.div`
     }
 
     @media screen and (max-width: 500px) {
+        .content h1{
+            font-size: 40px;
+        }
+        .content p {
+            font-size: 15px;
+        }
+        .form {
+            flex: 3;
+        }
         .form h1 {
             font-size: 30px;
-            margin: 0.5rem auto auto auto;
+        }
+        .alert-area {
+            min-height: 40px;
         }
         .subcontainer-form svg{
             margin-bottom: 0; 
@@ -190,17 +201,11 @@ const Wrapper = styled.div`
             padding: 8px;
             font-size: 12px;
         }
-        .subcontainer-form button {
-            /* margin-top: 0.3rem; */
-        }
         .text-button {
             margin-top: 0.5rem;
         }
         .form {
             height: 380px;
-        }
-        .content {
-            margin-top: -2.4rem;
         }
         .success {
             padding: 0.1rem 2rem;

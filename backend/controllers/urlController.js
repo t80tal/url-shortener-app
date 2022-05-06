@@ -6,42 +6,48 @@ import { StatusCodes } from 'http-status-codes'
 // For ObjectId.isValid
 import mongoose from 'mongoose'
 
-
-const createUrl = async (req, res) => {
-    let longUrl = req.body.longUrl
-    const protocol = longUrl.split(".")[0].split(":")
+// url validator
+const urlValdiator = (longUrl) => {
     const allowedProtocols = ['http', 'https', 'ftp', 'smtp']
-    // Url Validation
+
+    const protocol = longUrl.split(".")[0].split(":")
     if ((longUrl.length > 2) && longUrl.includes('.') && (longUrl[0] !== '.') && (longUrl[longUrl.length - 1] !== '.')) {
         if (!allowedProtocols.includes(protocol[0])) {
             // If there's not a protocol then add one.
             if (protocol.length === 1) {
                 longUrl = 'https://' + longUrl
+                return longUrl
             } else {
                 throw new UnprocessableEntity('Enter a valid URL.')
             }
+        } else {
+            return longUrl
         }
-        // Generate unique random link code.
-        let random_url_code = ''
-        while (true) {
-            random_url_code = Math.random().toString(36).substring(2, 12)
-            const url = await Url.findOne({ urlCode: random_url_code })
-            if (!url) {
-                break
-            }
-        }
-        // Insert to db with current userID as a creator.
-        const url = await Url.create({ urlCode: random_url_code, longUrl, createdBy: req.user.userId })
-        const { urlCode, views, id } = url
-        res.status(StatusCodes.OK).json({
-            id,
-            urlCode,
-            longUrl,
-            views
-        })
     } else {
         throw new UnprocessableEntity('Enter a valid URL.')
     }
+}
+
+const createUrl = async (req, res) => {
+    let longUrl = urlValdiator(req.body.longUrl)
+    // Generate unique random link code.
+    let random_url_code = ''
+    while (true) {
+        random_url_code = Math.random().toString(36).substring(2, 12)
+        const url = await Url.findOne({ urlCode: random_url_code })
+        if (!url) {
+            break
+        }
+    }
+    // Insert to db with current userID as a creator.
+    const url = await Url.create({ urlCode: random_url_code, longUrl, createdBy: req.user.userId })
+    const { urlCode, views, id } = url
+    res.status(StatusCodes.OK).json({
+        id,
+        urlCode,
+        longUrl,
+        views
+    })
 }
 
 const deleteUrl = async (req, res) => {
@@ -79,12 +85,12 @@ const updateUrlById = async (req, res) => {
         throw new NotFoundError(`No url with id :${urlId}`)
     }
 
-    const { longUrl } = req.body
+    let { longUrl } = req.body
     if (!longUrl) {
         throw new UnprocessableEntity('Please provide url')
     }
     // Url Validation
-    new URL(longUrl);
+    longUrl = urlValdiator(longUrl)
 
     const url = await Url.findOne({ _id: urlId })
     if (!url) {
@@ -92,7 +98,7 @@ const updateUrlById = async (req, res) => {
     }
     // check permissions
     checkPermissions(req.user, url.createdBy)
-    const updatedUrl = await Url.findOneAndUpdate({ _id: urlId }, req.body, {
+    const updatedUrl = await Url.findOneAndUpdate({ _id: urlId }, { longUrl }, {
         new: true,
         runValidators: true,
     })
