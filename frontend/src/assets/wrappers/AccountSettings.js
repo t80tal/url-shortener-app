@@ -150,6 +150,12 @@ const Wrapper = styled.div`
             margin: auto;
             flex-direction: column;
         }
+
+        .option {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
 `
